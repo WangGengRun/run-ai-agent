@@ -2,6 +2,7 @@ package com.run.runaiagent.app;
 
 import com.run.runaiagent.advisor.MyLoggerAdvisor;
 import com.run.runaiagent.advisor.ReReadingAdvisor;
+import com.run.runaiagent.chatmemory.FileBasedChatMemory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -32,8 +33,12 @@ public class LoveApp {
      * @param dashscopeChatModel
      */
     public LoveApp(ChatModel dashscopeChatModel) {
+        String fileDir =System.getProperty("user.dir")+"/chat-memory";
+        //初始化基于文件的对话记忆
+        FileBasedChatMemory chatMemory=new FileBasedChatMemory(fileDir);
+
         //初始化基于内存的对话记忆
-        ChatMemory chatMemory=new InMemoryChatMemory();
+//        ChatMemory chatMemory=new InMemoryChatMemory();
         //拦截器对所有请求生效，也可以在单次请求创建拦截器
         chatClient=ChatClient.builder(dashscopeChatModel)
                 .defaultSystem(SYSTEM_PROMPT)
