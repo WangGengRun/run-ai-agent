@@ -1,11 +1,15 @@
 spring:
   application:
    name: run-ai-agent
+  profiles:
+    active: local
 server:
   port: 8123
   servlet:
    context-path: /api
-    #springdoc-openapi ??????
+
+
+#springdoc-openapi ??????
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
