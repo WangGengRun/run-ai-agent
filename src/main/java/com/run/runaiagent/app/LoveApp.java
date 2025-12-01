@@ -1,6 +1,7 @@
 package com.run.runaiagent.app;
 
 import com.run.runaiagent.advisor.MyLoggerAdvisor;
+import com.run.runaiagent.advisor.ReReadingAdvisor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -38,6 +39,8 @@ public class LoveApp {
                         new MessageChatMemoryAdvisor(chatMemory),
                         //自定义日志拦截器
                         new MyLoggerAdvisor()
+                        //自定义R2拦截器按需开启
+//                        new ReReadingAdvisor()
                 )
                 .build();
     }
