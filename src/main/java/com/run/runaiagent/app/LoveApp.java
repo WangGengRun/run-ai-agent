@@ -1,5 +1,6 @@
 package com.run.runaiagent.app;
 
+import com.alibaba.cloud.ai.advisor.RetrievalRerankAdvisor;
 import com.run.runaiagent.advisor.MyLoggerAdvisor;
 import com.run.runaiagent.advisor.ReReadingAdvisor;
 import com.run.runaiagent.chatmemory.FileBasedChatMemory;
@@ -8,12 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.vectorstore.VectorStore;
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -96,6 +100,10 @@ public class LoveApp {
     //AI恋爱知识库问答功能
     @Resource
     private VectorStore loveAppVectorStore;
+    @Resource
+    private Advisor loveAppRagCloudAdvisor;
+//    @Resource
+//    private ChatMemory loveAppChatMemory;
 
     /**
      * 和RAG知识库进行对话
@@ -111,7 +119,9 @@ public class LoveApp {
                 //开启日志，便于观察效果
                 .advisors(new MyLoggerAdvisor())
                 //应用RAG知识库问答
-                .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
+//                .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
+                //应用RAG检索增强服务（基于云知识库服务）
+                .advisors(loveAppRagCloudAdvisor)
                 .call()
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
