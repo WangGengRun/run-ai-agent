@@ -4,6 +4,7 @@ import com.alibaba.cloud.ai.advisor.RetrievalRerankAdvisor;
 import com.run.runaiagent.advisor.MyLoggerAdvisor;
 import com.run.runaiagent.advisor.ReReadingAdvisor;
 import com.run.runaiagent.chatmemory.FileBasedChatMemory;
+import com.run.runaiagent.rag.QueryRewriter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -109,7 +110,8 @@ public class LoveApp {
 //    @Resource
 //    private ChatMemory chatMemory;
 
-
+@Resource
+private QueryRewriter queryRewriter;
     /**
      * 和RAG知识库进行对话
      * @param message
@@ -117,8 +119,12 @@ public class LoveApp {
      * @return
      */
     public String doChatWithRag(String message, String chatId) {
-        ChatResponse chatResponse = chatClient.prompt()
-                .user(message)
+        //查询重写
+        String rewritenMessage = queryRewriter.doQueryRewrite(message);
+        ChatResponse chatResponse = chatClient
+                .prompt()
+                //使用改写后的查询
+                .user(rewritenMessage)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
                 //开启日志，便于观察效果
