@@ -4,6 +4,7 @@ import com.alibaba.cloud.ai.advisor.RetrievalRerankAdvisor;
 import com.run.runaiagent.advisor.MyLoggerAdvisor;
 import com.run.runaiagent.advisor.ReReadingAdvisor;
 import com.run.runaiagent.chatmemory.FileBasedChatMemory;
+import com.run.runaiagent.rag.LoveAppRagCustomAdvisorFactory;
 import com.run.runaiagent.rag.QueryRewriter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -130,11 +131,18 @@ private QueryRewriter queryRewriter;
                 //开启日志，便于观察效果
                 .advisors(new MyLoggerAdvisor())
                 //应用RAG知识库问答
-                .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
+//                .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
                 //应用RAG检索增强服务（基于云知识库服务）
 //                .advisors(loveAppRagCloudAdvisor)
                 //应用RAG检索增强服务（基于PgVector向量存储）
 //                .advisors(new QuestionAnswerAdvisor(pgVectorVectorStore))
+
+                //过滤条件为已婚，只能查出已婚的文档，不能回答单身的问题
+                .advisors(
+                        LoveAppRagCustomAdvisorFactory.createLoveAppRagCustomAdvisor(
+                                loveAppVectorStore,"已婚"
+                        )
+                )
                 .call()
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
