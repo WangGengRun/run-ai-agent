@@ -3,6 +3,13 @@ spring:
    name: run-ai-agent
   profiles:
     active: local
+  ai:
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        dimensions: 1536
+        distance-type: COSINE_DISTANCE
+        max-document-batch-size: 10000
 server:
   port: 8123
   servlet:
