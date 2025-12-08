@@ -100,12 +100,12 @@ public class LoveApp {
     //AI恋爱知识库问答功能
     @Resource
     private VectorStore loveAppVectorStore;
-    @Resource
-    private Advisor loveAppRagCloudAdvisor;
+//    @Resource
+//    private Advisor loveAppRagCloudAdvisor;
 //    @Resource
 //    private ChatMemory loveAppChatMemory;
-    @Resource
-    private VectorStore pgVectorVectorStore;
+//    @Resource
+//    private VectorStore pgVectorVectorStore;
 //    @Resource
 //    private ChatMemory chatMemory;
 
@@ -124,9 +124,9 @@ public class LoveApp {
                 //开启日志，便于观察效果
                 .advisors(new MyLoggerAdvisor())
                 //应用RAG知识库问答
-//                .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
+                .advisors(new QuestionAnswerAdvisor(loveAppVectorStore))
                 //应用RAG检索增强服务（基于云知识库服务）
-                .advisors(loveAppRagCloudAdvisor)
+//                .advisors(loveAppRagCloudAdvisor)
                 //应用RAG检索增强服务（基于PgVector向量存储）
 //                .advisors(new QuestionAnswerAdvisor(pgVectorVectorStore))
                 .call()
