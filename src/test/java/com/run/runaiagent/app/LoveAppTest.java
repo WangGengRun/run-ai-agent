@@ -63,7 +63,7 @@ class LoveAppTest {
         //测试联网搜索问题
         testMessage("周末想带女朋友去上海约会，推荐几个适合情侣的小众打卡地？");
         //测试网页抓取能力
-        testMessage("最近和对象吵架了，看看编程导航网站（codefather.cn）的其他情侣是怎么解决矛盾的？");
+        testMessage("最近和对象吵架了，看看恋爱教程（https://zh.wikihow.com）的其他情侣是怎么解决矛盾的？");
         //测试资源下载
         testMessage("直接下载一张适合做手机壁纸的星空情侣图片为文件");
         //测试终端操作，执行代码
@@ -77,6 +77,19 @@ class LoveAppTest {
     private void testMessage(String message) {
         String chatId = UUID.randomUUID().toString();
         String answer = loveApp.doChatWithTools(message, chatId);
+        Assertions.assertNotNull(answer);
+    }
+
+    @Test
+    void doChatWithMcp() {
+        String chatId = UUID.randomUUID().toString();
+        //测试地图MCP
+//        String message = "我的另一半居住在上海静安区，请帮我找到 5 公里内合适的约会地点";
+//        String answer = loveApp.doChatWithMcp(message, chatId);
+//        Assertions.assertNotNull(answer);
+        //测试图片搜索MCP
+        String message = "帮我搜索一些哄另一半开心的图片";
+        String answer =  loveApp.doChatWithMcp(message, chatId);
         Assertions.assertNotNull(answer);
     }
 }
