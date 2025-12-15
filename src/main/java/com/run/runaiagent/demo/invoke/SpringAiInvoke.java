@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * SpringAI框架调用AI大模型
  */
-@Component
+//@Component
 public class SpringAiInvoke implements CommandLineRunner {
     @Resource
     private ChatModel dashscopeChatModel;
