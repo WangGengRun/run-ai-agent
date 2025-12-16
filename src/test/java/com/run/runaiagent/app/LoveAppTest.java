@@ -47,7 +47,7 @@ class LoveAppTest {
     @Test
     void doChatWithRag() {
         String chatId = UUID.randomUUID().toString();
-        String message = "我想问一下我该如何提升自己去和喜欢的女生表白？";
+        String message = "我现在创作没有灵感，你能给我一些建议吗";
 //        String message = "地球是圆的吗";
         String answer = loveApp.doChatWithRag(message, chatId);
         //Assertions 语法

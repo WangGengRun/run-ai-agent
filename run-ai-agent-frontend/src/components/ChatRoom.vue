@@ -44,6 +44,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 
 const props = defineProps({
   title: { type: String, required: true },
@@ -60,7 +61,7 @@ const scrollArea = ref(null);
 const activeAiMessage = ref(null);
 const pendingText = ref('');
 const typeTimer = ref(null);
-const apiBase = (import.meta.env.VITE_API_BASE || 'http://localhost:8123/api').replace(/\/$/, '');
+const apiBase = API_BASE_URL;
 
 const showChatId = computed(() => props.mode === 'love');
 const aiAvatar = computed(() => {

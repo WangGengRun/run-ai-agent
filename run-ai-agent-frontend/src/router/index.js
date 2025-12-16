@@ -7,6 +7,9 @@ const routes = [
   { path: '/love', name: 'love', component: LoveChat },
   { path: '/manus', name: 'manus', component: ManusChat },
 ];
-
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+ ? '/api' 
+ : 'http://localhost:8123/api' 
+ 
 export default routes;
 

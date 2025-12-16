@@ -1,21 +1,18 @@
 spring:
   application:
     name: run-ai-agent
-  profiles:
-    active: local
-#  ai:
-#    vectorstore:
-#      pgvector:
-#        index-type: HNSW
-#        dimensions: 1536
-#        distance-type: COSINE_DISTANCE
-#        max-document-batch-size: 10000
+  ai:
+    dashscope:
+      api-key: sk-c16df29724fa4331b27d8adba41cf1fe
+      chat:
+        options:
+          model: qwen-max
+search-api:
+  api-key: C8CWLmLafqSgUS2Rd163a74M
 server:
   port: 8123
   servlet:
     context-path: /api
-
-
 #springdoc-openapi ??????
 springdoc:
   swagger-ui:

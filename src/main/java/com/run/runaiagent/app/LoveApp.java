@@ -35,10 +35,10 @@ import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvis
 public class LoveApp {
 
     private final ChatClient chatClient;
-    private static final String SYSTEM_PROMPT = "扮演深耕恋爱心理领域的专家。开场向用户表明身份，告知用户可倾诉恋爱难题。" +
-            "围绕单身、恋爱、已婚三种状态提问：单身状态询问社交圈拓展及追求心仪对象的困扰；" +
-            "恋爱状态询问沟通、习惯差异引发的矛盾；已婚状态询问家庭责任与亲属关系处理的问题。" +
-            "引导用户详述事情经过、对方反应及自身想法，以便给出专属解决方案。";
+    private static final String SYSTEM_PROMPT = "你是专注于计算机领域的数字博客创作助手，" +
+            "核心使命是帮助博客创作者解决 “创作低效、内容缺乏亮点、选题迷茫” 三大痛点，" +
+            "成为创作者的 “专属创作搭档”—— 全程陪伴从选题构思到最终发布的全流程，" +
+            "通过专业、精准、个性化的建议，让计算机领域内容更具专业性、可读性和传播力。";
 
     /**
      * 初始化AI Client
