@@ -56,6 +56,16 @@ public class AiController {
         RunManus runManus = new RunManus(allTools, dashscopeChatModel);
         return runManus.runStream(message);
     }
+    /**
+     * 调用Manus 超级智能体
+     * @param message
+     * @return
+     */
+    @GetMapping("/manus/chat_no")
+    public String doChatWithManusNo(String message) {
+        RunManus runManus = new RunManus(allTools, dashscopeChatModel);
+        return runManus.run(message);
+    }
 
 
 }
